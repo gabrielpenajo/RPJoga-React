@@ -23,7 +23,7 @@ export function Card({ title, image, imageAlt, content, details }) {
     )
     const modalRef = (
         <dialog id="card-modal" open
-            class="absolute min-h-full min-w-full top-0 drop-shadow-2xl bg-transparent
+            class="absolute min-h-full min-w-full drop-shadow-2xl bg-transparent
                    flex justify-center">
             <div class="grid w-[75%] h-fit bg-white p-3 rounded-lg">
                 <div id="header" class="flex flex-row justify-between">
@@ -50,14 +50,14 @@ export function Card({ title, image, imageAlt, content, details }) {
 
     if (isOpen)
         return (
-            <div class="wrapper">
-                {cardRef}
+            <>
                 {modalRef}
-            </div> 
+                {cardRef}
+            </> 
         );
     else return (
-        <div class="wrapper">
+        <>
             {cardRef}
-        </div>
+        </>
     );
 }
