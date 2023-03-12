@@ -2,6 +2,7 @@
 
 # dependencies
 /node_modules
+/rpjoga-backend/node_modules
 /.pnp
 .pnp.js
 
