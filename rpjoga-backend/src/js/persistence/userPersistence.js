@@ -16,6 +16,10 @@ const SELECT_USER_BY_ID =
             FROM user
             WHERE id=UUID_TO_BIN(?)`;
 
+const SELECT_ALL_USERS = 
+    `SELECT BIN_TO_UUID(id) as id,fullname,username,email,DATE_FORMAT(birth_date,'%Y-%m-%d') as birth_date
+        FROM user`;
+
 const SELECT_USER_BY_EMAIL =
     `SELECT BIN_TO_UUID(id) as id,fullname,username,email,password,DATE_FORMAT(birth_date,'%Y-%m-%d') as birth_date
             FROM user
@@ -28,6 +32,17 @@ export async function retrieveUserById(id) {
     } catch (err) {
         throw new CustomError(CustomErrorType.DatabaseError,
             'Error retrieving user by id: ' + id,
+            err);
+    }
+}
+
+export async function retrieveAllUsers() {
+    try {
+        const [rows] = await getPool().execute(SELECT_ALL_USERS, []);
+        return rows;
+    } catch (err) {
+        throw new CustomError(CustomErrorType.DatabaseError,
+            'Error retrieving user list',
             err);
     }
 }

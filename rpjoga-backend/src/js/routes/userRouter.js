@@ -1,5 +1,5 @@
 import express, { json } from 'express';
-import { createUser, updateUser, retrieveUserByEmail } from '../persistence/userPersistence.js';
+import { createUser, updateUser, retrieveUserByEmail, retrieveAllUsers } from '../persistence/userPersistence.js';
 import bcrypt from "bcrypt";
 
 const router = express.Router();
@@ -33,6 +33,20 @@ router.get('/', async (req, res) => {
     } catch (err) {
         console.log(err);
         res.status(500).send('Error retrieving user');
+    }
+})
+
+router.get('/all', async (req, res) => {
+    try {
+        const user = await retrieveAllUsers(req.query.email);
+        if (user) {
+            return res.json(user);
+        } else {
+            res.status(404).send('User does not exist');
+        }
+    } catch (err) {
+        console.log(err);
+        res.status(500).send('Error retrieving users');
     }
 })
 
