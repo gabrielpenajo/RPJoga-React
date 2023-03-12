@@ -14,7 +14,7 @@ const oneDay = 1000 * 60 * 60; //One hour
 app.use(session({
     secret: 'rpjogasecret4i20',
     saveUninitialized: false,
-    cookie: { maxAge: time }, 
+    cookie: { maxAge: 43200000 }, 
     resave: false
 }));
 
