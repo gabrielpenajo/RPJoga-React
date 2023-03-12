@@ -1,10 +1,11 @@
 import { Card } from "../components/Card";
+import { Navbar } from "../components/Navbar";
 import { useRef, useEffect } from 'react';
-
 
 function Home() {
     return (
-        <div>
+        <>
+            <Navbar></Navbar>
             <Card
                 title={"Oi"}
                 content={<p>Olá</p>}
@@ -37,7 +38,7 @@ function Home() {
                     </div>
                 }
             />
-        </div>
+        </>
     );
 }
 
