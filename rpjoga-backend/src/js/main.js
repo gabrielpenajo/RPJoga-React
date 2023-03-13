@@ -9,12 +9,12 @@ import rpgRouter from './routes/rpgRouter.js';
 const app = express();
 
 const port = 5000;
-const oneDay = 1000 * 60 * 60; //One hour
+const maxAge = 43200000
 
 app.use(session({
     secret: 'rpjogasecret4i20',
     saveUninitialized: false,
-    cookie: { maxAge: 43200000 }, 
+    cookie: { maxAge: maxAge }, 
     resave: false
 }));
 
