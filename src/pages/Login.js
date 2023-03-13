@@ -12,10 +12,11 @@ function Login() {
 
     return (
         <div className="bg-main min-h-screen overflow-auto">
+            <img src={`${process.env.PUBLIC_URL}/assets/images/Castle-cuate.svg`} className="absolute bg-no-repeat h-full opacity-10 bottom-0 right-0 pointer-events-none -z-1"/>
             <div className="flex flex-col p-4">
                 <div className="h-12 w-full flex flex-row gap-2">
                     <a href="/"
-                        className="outline outline-2 bg-transparent ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-secondary">Voltar</a>
+                        class="outline outline-2 bg-transparent ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-secondary">Voltar</a>
                 </div>
             </div>
             <div className="flex flex-row justify-center min-h-1/2">
