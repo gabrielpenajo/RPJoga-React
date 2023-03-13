@@ -35,11 +35,11 @@ export function Navbar({ onClick }) {
                         </button>
                     </label>
                     <nav class="hidden space-x-10 md:flex">
-                        <a href="/rpgs.html" class="text-base font-medium text-gray-400 hover:text-secondary">RPGs</a>
-                        <a href="/profile.html" class="text-base font-medium text-white hover:text-secondary">Meu perfil</a>
+                        <a href="/rpgs" class="text-base font-medium text-gray-400 hover:text-secondary">RPGs</a>
+                        <a href="/profile" class="text-base font-medium text-white hover:text-secondary">Meu perfil</a>
                     </nav>
                     <div class="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
-                        <a href="/login.html" class="whitespace-nowrap text-base font-medium text-white hover:text-secondary">Sair</a>
+                        <a href="/login" class="whitespace-nowrap text-base font-medium text-white hover:text-secondary">Sair</a>
                     </div>
                 </div>
             </div>
