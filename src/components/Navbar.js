@@ -1,17 +1,29 @@
-import { useState } from "react";
+import { useState } from "react"
+import { MenuToggle } from "./MenuToggle"
 
-export function Navbar() {
+export function Navbar({ onClick }) {
+    const [isOpen, setOpen] = useState(false)
+
+    const handleMenuClick = (event) => {
+        setOpen(!isOpen)
+        event.stopPropagation()
+    }
+
     return (
+    <>
         <div class="bg-main">
             <div class="mx-auto max-w-7xl px-6">
                 <div class="flex items-center justify-between py-4 md:justify-start md:space-x-10">
                     <div class="flex justify-start lg:w-0 lg:flex-1">
                         <a href="/rpgs.html">
                             <span class="sr-only">RPJoga</span>
-                            <img class="h-8 w-8 sm:h-10 sm:w-10" src={`${process.env.PUBLIC_URL}/logo.png`} alt="" />
+                            <img class="h-8 w-8 sm:h-10 sm:w-10" src={`${process.env.PUBLIC_URL}/logo.png`} alt="RPJoga" />
                         </a>
                     </div>
-                    <label for="menuToggle" class="-my-2 -mr-2 md:hidden bg-main hover:bg-secondary rounded-md">
+                    <label
+                        for="menuToggle" class="-my-2 -mr-2 md:hidden bg-main hover:bg-secondary rounded-md"
+                        onClick={handleMenuClick}
+                    >
                         <button type="button"
                             class="inline-flex items-center justify-center p-2 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
                             aria-expanded="false">
@@ -32,5 +44,8 @@ export function Navbar() {
                 </div>
             </div>
         </div>
+
+        <MenuToggle isOpen={isOpen} setIsOpen={setOpen}></MenuToggle>
+    </>
     )
 }

@@ -1,16 +1,28 @@
-export function MenuToggle() {
+import { useState } from "react"
+
+export function MenuToggle({ isOpen, setIsOpen }) {
+
+    const handleMenuState = (event) => {
+        setIsOpen(!isOpen)
+        event.stopPropagation()
+    }
+
     return (
+    <div class={isOpen ? "" : "hidden"}>
         <div class="absolute z-10 inset-x-0 top-0 origin-top-right transform p-2 transition md:hidden">
             <div class="divide-y-2 divide-gray-50 rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5">
                 <div class="px-5 pt-5 pb-6">
                     <div class="flex items-center justify-between">
                         <div>
-                            <a href="/rpgs.html"><img class="h-8 w-auto" src="src/resources/RPJoga1000.png" alt="RPJoga"/></a>
+                            <a href="/rpgs.html"><img class="h-8 w-auto" src={`${process.env.PUBLIC_URL}/logo.png`} alt="RPJoga"/></a>
                         </div>
                         <label
                             class="rounded-md pl-2 pt-2 pr-2 bg-white hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 -mr-2 items-center justify-center"
                             for="menuToggle">
-                            <button type="button" class="inline-flex hover:text-gray-500 text-gray-400 items-center justify-center">
+                            <button
+                                type="button" class="inline-flex hover:text-gray-500 text-gray-400 items-center justify-center"
+                                onClick={handleMenuState}
+                            >
                                 <span class="sr-only">Fechar menu</span>
                                 <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                     stroke-width="1.5" stroke="currentColor" aria-hidden="true">
@@ -45,5 +57,6 @@ export function MenuToggle() {
                 </div>
             </div>
         </div>
+    </div>
     )
 }
