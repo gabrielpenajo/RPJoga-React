@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Button } from "../components/Button";
 import { Input } from "../components/Input";
 
@@ -6,6 +7,9 @@ const ColoredLine = ({ color }) => (
 );
 
 function Login() {
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+
     return (
         <div className="bg-main min-h-screen overflow-auto">
             <div className="flex flex-col p-4">
@@ -25,10 +29,10 @@ function Login() {
                             <form className="mt-8 space-y-6" action="/rpgs">
                                 <div className="space-y-px rounded-md shadow-sm">
                                     <div className="mb-6">
-                                        <Input id="email" value="" label="Email" type="email" size="full" onChange={e => { }} />
+                                        <Input id="email" value={email} label="Email" type="email" size="full" onChange={e => setEmail(e.target.value)} />
                                     </div>
                                     <div className="mb-4">
-                                        <Input id="senha" value="" label="Senha" type="password" size="full" onChange={e => { }}/>
+                                        <Input id="senha" value={password} label="Senha" type="password" size="full" onChange={e => setPassword(e.target.value)}/>
                                     </div>
                                 </div>
                                 <div>      
