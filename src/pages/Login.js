@@ -12,7 +12,11 @@ function Login() {
 
     return (
         <div className="bg-main min-h-screen overflow-auto">
-            <img src={`${process.env.PUBLIC_URL}/assets/images/Castle-cuate.svg`} className="absolute bg-no-repeat h-full opacity-10 bottom-0 right-0 pointer-events-none -z-1"/>
+            <img
+                src={`${process.env.PUBLIC_URL}/assets/images/Castle-cuate.svg`}
+                className="absolute bg-no-repeat h-full opacity-10 bottom-0 right-0 pointer-events-none -z-1"
+                alt="Imagem de fundo"
+            />
             <div className="flex flex-col p-4">
                 <div className="h-12 w-full flex flex-row gap-2">
                     <a href="/"
