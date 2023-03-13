@@ -1,6 +1,4 @@
-import { useState } from "react"
-
-export function MenuToggle({ isOpen, setIsOpen }) {
+export function MenuToggle({ isOpen, setIsOpen, focusedLink }) {
 
     const handleMenuState = (event) => {
         setIsOpen(!isOpen)
@@ -8,7 +6,7 @@ export function MenuToggle({ isOpen, setIsOpen }) {
     }
 
     return (
-    <div className={isOpen ? "" : "hidden"}>
+    <nav className={isOpen ? "" : "hidden"}>
         <div className="absolute z-10 inset-x-0 top-0 origin-top-right transform p-2 transition md:hidden">
             <div className="divide-y-2 divide-gray-50 rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5">
                 <div className="px-5 pt-5 pb-6">
@@ -37,14 +35,18 @@ export function MenuToggle({ isOpen, setIsOpen }) {
                                 <span className="material-symbols-outlined text-main">
                                     account_circle
                                 </span>
-                                <span className="ml-3 text-base font-medium text-gray-900">Meu perfil</span>
+                                <span
+                                    className={`ml-3 text-base font-medium ${focusedLink === 'profile' ? 'text-main' : "text-gray-900"}`}
+                                >Meu perfil</span>
                             </a>
 
                             <a href="/rpgs.html" className="-m-3 flex items-center rounded-md p-3 hover:bg-gray-50">
                                 <span className="material-symbols-outlined text-main">
                                     book
                                 </span>
-                                <span className="ml-3 text-base font-medium text-gray-900">RPGs</span>
+                                <span
+                                    className={`ml-3 text-base font-medium ${focusedLink === 'rpgs' ? 'text-main' : "text-gray-900"}`}
+                                >RPGs</span>
                             </a>
                         </nav>
                     </div>
@@ -57,6 +59,6 @@ export function MenuToggle({ isOpen, setIsOpen }) {
                 </div>
             </div>
         </div>
-    </div>
+    </nav>
     )
 }
