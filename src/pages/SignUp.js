@@ -1,23 +1,62 @@
 import { Input } from "../components/Input";
 import { Button } from "../components/Button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function SignUp() {
-    const [birthdate, setBirthdate] = useState('');
-    const [username, setUsername] = useState('');
-    const [email, setEmail] = useState('');
-    const [fullname, setFullname] = useState('');
-    const [password, setPassword] = useState('');
-    const [passwordConfirm, setPasswordConfirm] = useState('');
+    const [birthdate, setBirthdate] = useState('')
+    const [isBirthdateValid, setIsBirthdateValid] = useState(false)
+
+    const [username, setUsername] = useState('')
+    const [isUsernameValid, setIsUsernameValid] = useState(false)
+
+    const [email, setEmail] = useState('')
+    const [isEmailValid, setIsEmailValid] = useState(false)
+
+    const [fullname, setFullname] = useState('')
+    const [isFullnameValid, setIsFullnameValid] = useState(false)
+
+    const [password, setPassword] = useState('')
+    const [passwordConfirm, setPasswordConfirm] = useState('')
+    const [isPasswordValid, setIsPasswordValid] = useState(false)
+    
+    const isValid = () => {
+        return (isPasswordValid && isFullnameValid && isEmailValid && isUsernameValid && isBirthdateValid)
+    }
 
     const handlePasswordConfirm = (e) => {
         const passwordValue = e.target.value
 
         setPasswordConfirm(passwordValue)
         
-        if (passwordValue != password) {
-            console.log('error')
-        } 
+        setIsPasswordValid(passwordValue == password) 
+    }
+
+    const handleFullname = (e) => {
+        setFullname(e.target.value)
+        setIsFullnameValid(e.target.value.length > 0)
+    }
+
+    const handlePassword = (e) => {
+        setPassword(e.target.value)
+        setIsPasswordValid(e.target.value.length > 0)
+    }
+
+    const handleBirthdate = (e) => {
+        const date = e.target.value
+        
+        setBirthdate(date)
+        console.log(date, date.length !== 0);
+        setIsBirthdateValid(date.length !== 0)
+    }
+
+    const handleEmail = (e) => {
+        setEmail(e.target.value)
+        setIsEmailValid(e.target.value.length > 0)
+    }
+
+    const handleUsername = (e) => {
+        setUsername(e.target.value)
+        setIsUsernameValid(e.target.value.length > 0)
     }
 
     return (
@@ -42,29 +81,29 @@ function SignUp() {
                         <div className="w-full flex flex-col justify-center items-center md:flex-row">
                             <div className="w-full flex flex-col p-2 md:basis-1/2">
                                 <div className="mb-4">
-                                    <Input id="fullname" value={fullname} label="Nome Completo" type="text" size="full" onChange={e => setFullname(e.target.value)} />
+                                    <Input id="fullname" value={fullname} label="Nome Completo" type="text" size="full" onChange={handleFullname} />
                                 </div>
                                 <div className="mb-4">
-                                    <Input id="password" value={password} label="Senha" type="password" size="full" onChange={e => setPassword(e.target.value)} />
+                                    <Input id="password" value={password} label="Senha" type="password" size="full" onChange={handlePassword} />
                                 </div>
                                 <div className="md:mb-4">
-                                <Input id="birthDay" value={birthdate} label="Data de Nascimento" type="date" size="full" onChange={e => setBirthdate(e.target.value)} />
+                                <Input id="birthDay" value={birthdate} label="Data de Nascimento" type="date" size="full" onChange={handleBirthdate} />
                                 </div>
                             </div>
                             <div className="w-full flex flex-col p-2 md:basis-1/2">
                                 <div className="mb-4">
-                                <Input id="email" value={email} label="Email" type="text" size="full" onChange={e => setEmail(e.target.value)} />
+                                <Input id="email" value={email} label="Email" type="text" size="full" onChange={handleEmail} />
                                 </div>
                                 <div className="mb-4">
                                 <Input id="confirmPassword" value={passwordConfirm} label="Confirmar senha" type="password" size="full" onChange={handlePasswordConfirm} />
                                 </div>
                                 <div className="mb-4">
-                                <Input id="username" value={username} label="Nome de usuário" type="text" size="full" onChange={e => setUsername(e.target.value)} />
+                                <Input id="username" value={username} label="Nome de usuário" type="text" size="full" onChange={handleUsername} />
                                 </div>
                             </div>
                         </div>
                         <div className="flex flex-col w-full justify-center items-center mb-4 md:w-1/3">
-                            <Button label={"Confirmar Cadastro"} color="success" action="none" type={'submit'}/>
+                            <Button label={"Confirmar Cadastro"} color="success" action="none" type={'submit'} isValid={isValid()}/>
                         </div>
                 </form>
             </div>
