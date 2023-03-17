@@ -18,45 +18,25 @@ function Rpgs() {
     }, []);
 
     const rpgCards = rpgs.map(rpg =>
-        <Card key={rpg.rpg_id} title={rpg.title} tags={rpg.theme_list} description={rpg.description}></Card>
+        <Card
+            key={rpg.rpg_id}
+            title={rpg.title}
+            tags={rpg.theme_list}
+            description={rpg.description}
+            image={rpg.image_url}
+        ></Card>
     );
 
     return (
         <>
             <Navbar focusedLink={"rpg"}></Navbar>
-            {rpgCards}
-            <Card
-                title={"Oi"}
-                content={<p>Olá</p>}
-                image={"https://play-lh.googleusercontent.com/8ddL1kuoNUB5vUvgDVjYY3_6HwQcrg1K2fd_R8soD-e2QYj8fT9cfhfh3G0hnSruLKec"}
-                imageAlt={"Amogus"}
-                details={
-                    <div className="flex flex-row gap-2">
-                        <label for="tags" className="font-semibold">Tags:</label>
-                        <ul>
-                            <li>Terror</li>
-                            <li>Suspense</li>
-                            <li>Fred Desimpedidos</li>
-                        </ul>
+            <div class="flex flex-col w-full items-center">
+                <div class="flex flex-col md:w-2/3 max-w-4xl">
+                    <div class="flex flex-col items-center gap-8 p-4 w-full">
+                        {rpgCards}
                     </div>
-                }
-            />
-            <Card
-                title={"Oi"}
-                content={<p>Olá</p>}
-                image={"https://play-lh.googleusercontent.com/8ddL1kuoNUB5vUvgDVjYY3_6HwQcrg1K2fd_R8soD-e2QYj8fT9cfhfh3G0hnSruLKec"}
-                imageAlt={"Amogus"}
-                details={
-                    <div className="flex flex-row gap-2">
-                        <label for="tags" className="font-semibold">Tags:</label>
-                        <ul>
-                            <li>Terror</li>
-                            <li>Suspense</li>
-                            <li>Fred Desimpedidos</li>
-                        </ul>
-                    </div>
-                }
-            />
+                </div>
+            </div>
         </>
     );
 }

@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export function Card({ title, image, imageAlt, description,  tags }) {
+export function Card({ title, image, description,  tags }) {
     const [isOpen, setOpen] = useState(false);
 
     const handleModalChange = (event) => {
@@ -20,7 +20,7 @@ export function Card({ title, image, imageAlt, description,  tags }) {
             <div className="flex flex-shrink-0">
                 <img className="w-28 h-28 rounded-md"
                     src={image}
-                    alt={imageAlt}/>
+                    alt={"Foto de " + title}/>
                 </div>
                 <div className="flex flex-col flex-grow gap-2">
                 <h3 className="font-bold text-xl">{title}</h3>
@@ -53,7 +53,7 @@ export function Card({ title, image, imageAlt, description,  tags }) {
                     <div className="flex flex-shrink-0">
                         <img className="w-28 h-28 rounded-md"
                             src={image}
-                            alt={imageAlt}/>
+                            alt={"Foto de " + title}/>
                         </div>
                         <div className="flex flex-col flex-grow gap-2">
                         <div className="flex flex-col gap-2">
@@ -72,13 +72,13 @@ export function Card({ title, image, imageAlt, description,  tags }) {
 
     if (isOpen)
         return (
-            <div>
+            <div className="w-full">
                 {modalRef}
                 {cardRef}
             </div> 
         );
     else return (
-        <div>
+        <div className="w-full">
             {cardRef}
         </div>
     );
