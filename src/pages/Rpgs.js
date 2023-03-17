@@ -1,10 +1,30 @@
+import { useEffect, useState } from "react";
 import { Card } from "../components/Card";
 import { Navbar } from "../components/Navbar";
+import { getAllRpgs } from "../services/RpgService";
 
 function Rpgs() {
+    const [rpgs, setRpgs] = useState([])
+
+    useEffect(() => {
+        async function fetchRpgs() {
+            const response = await getAllRpgs()
+            if (response.status === 200) {
+                const json = await response.json();
+                setRpgs(json);
+            }
+        }
+        fetchRpgs();
+    }, []);
+
+    const rpgCards = rpgs.map(rpg =>
+        <Card key={rpg.rpg_id} title={rpg.title} tags={rpg.theme_list} description={rpg.description}></Card>
+    );
+
     return (
         <>
             <Navbar focusedLink={"rpg"}></Navbar>
+            {rpgCards}
             <Card
                 title={"Oi"}
                 content={<p>Olá</p>}

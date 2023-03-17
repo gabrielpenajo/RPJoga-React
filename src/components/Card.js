@@ -1,12 +1,16 @@
 import { useState } from "react";
 
-export function Card({ title, image, imageAlt, content, details }) {
+export function Card({ title, image, imageAlt, description,  tags }) {
     const [isOpen, setOpen] = useState(false);
 
     const handleModalChange = (event) => {
         setOpen(!isOpen)
         event.stopPropagation()
     }
+
+    const tagsElement = tags ? tags.split(',').map((tag, index) =>
+        <li className="list-disc list-inside" key={index}>{tag}</li>
+    ) : <></>;
 
     const cardRef = (
         <div id="card" onClick={handleModalChange}
@@ -21,7 +25,7 @@ export function Card({ title, image, imageAlt, content, details }) {
                 <div className="flex flex-col flex-grow gap-2">
                 <h3 className="font-bold text-xl">{title}</h3>
                 <div className="flex flex-col">
-                    {content}
+                    <p>{description}</p>
                 </div>
             </div>
         </div>
@@ -30,7 +34,7 @@ export function Card({ title, image, imageAlt, content, details }) {
         <dialog id="card-modal"
             className="absolute min-w-full drop-shadow-2xl
                    flex justify-center bg-transparent"
-            onMouseLeave={handleModalChange}>
+            >
             <div className="grid w-[75%] h-fit bg-white p-3 rounded-lg">
                 <div id="header" className="flex flex-row justify-between">
                     <h3 className="font-bold text-xl">{title}</h3>
@@ -52,9 +56,12 @@ export function Card({ title, image, imageAlt, content, details }) {
                             alt={imageAlt}/>
                         </div>
                         <div className="flex flex-col flex-grow gap-2">
-                        <div className="flex flex-col">
-                            {content}
-                            {details}
+                        <div className="flex flex-col gap-2">
+                            <p>{description}</p>
+                            <p><b>Tags:</b></p>
+                            <ul>
+                                { tagsElement }
+                            </ul>
                         </div>
                     </div>
                 </div>
