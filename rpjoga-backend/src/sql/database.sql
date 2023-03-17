@@ -21,6 +21,7 @@ CREATE TABLE rpg
     title VARCHAR(256) NOT NULL,
     description VARCHAR(6000) NOT NULL,
     theme_list VARCHAR(6000) NOT NULL,
+    image_url VARCHAR(6000),
     user_id BINARY(16) NOT NULL,
     creation_date DATE NOT NULL,
     PRIMARY KEY(id),
