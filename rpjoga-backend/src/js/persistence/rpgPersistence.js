@@ -11,7 +11,7 @@ const UPDATE_RPG =
             WHERE BIN_TO_UUID(id)=?`;
 
 const SELECT_ALL_RPGS =
-    `SELECT BIN_TO_UUID(id) as id,title,description,theme_list,DATE_FORMAT(creation_date,'%Y-%m-%d') as creation_date
+    `SELECT BIN_TO_UUID(id) as id,title,description,theme_list,DATE_FORMAT(creation_date,'%Y-%m-%d') as creation_date, image_url
             FROM rpg`;
 
 const SELECT_RPG_BY_ID =
