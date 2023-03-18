@@ -25,9 +25,7 @@ function SignUp() {
 
     const handlePasswordConfirm = (e) => {
         const passwordValue = e.target.value
-
         setPasswordConfirm(passwordValue)
-        
         setIsPasswordValid(passwordValue == password) 
     }
 
@@ -45,7 +43,6 @@ function SignUp() {
         const date = e.target.value
         
         setBirthdate(date)
-        console.log(date, date.length !== 0);
         setIsBirthdateValid(date.length !== 0)
     }
 
