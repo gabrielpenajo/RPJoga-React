@@ -8,7 +8,26 @@ const ColoredLine = ({ color }) => (
 
 function Login() {
     const [email, setEmail] = useState('')
+    const [isEmailFilled, setIsEmailFilled] = useState(false)
     const [password, setPassword] = useState('')
+    const [isPasswordFilled, setIsPasswordFilled] = useState(false)
+
+    const handleEmail = (e) => {
+        const emailInput = e.target.value
+        setEmail(emailInput)
+        setIsEmailFilled(emailInput.length > 0 && emailInput.search(/@/g) !== -1)
+    }
+
+    const handlePassword = (e) => {
+        const passwordInput = e.target.value
+        setPassword(passwordInput)
+        setIsPasswordFilled(passwordInput.length > 0)
+    }
+
+    const isValid = () => {
+        console.log(isEmailFilled, isPasswordFilled);
+        return (isEmailFilled && isPasswordFilled)
+    }
 
     return (
         <div className="bg-main min-h-screen overflow-auto">
@@ -34,21 +53,21 @@ function Login() {
                             <form className="mt-8 space-y-6" action="/rpgs">
                                 <div className="space-y-px rounded-md shadow-sm">
                                     <div className="mb-6">
-                                        <Input id="email" value={email} label="Email" type="email" size="full" onChange={e => setEmail(e.target.value)} />
+                                        <Input id="email" value={email} label="Email" type="email" size="full" onChange={handleEmail}/>
                                     </div>
                                     <div className="mb-4">
-                                        <Input id="senha" value={password} label="Senha" type="password" size="full" onChange={e => setPassword(e.target.value)}/>
+                                        <Input id="senha" value={password} label="Senha" type="password" size="full" onChange={handlePassword}/>
                                     </div>
                                 </div>
                                 <div>      
-                                    <Button label={"Fazer login"} color="success" action="none" type={"submit"} /> 
+                                    <Button label={"Fazer login"} color="success" action="none" type={"submit"} isValid={isValid()}/> 
                                 </div>
                             </form>
                             <div className="flex flex-col items-center justify-center">
                                 <ColoredLine color="white" />
                                 <span className="text-white m-3">Ainda não tem uma conta?</span>
                                 <form className="w-full" action="/signUp">
-                                    <Button label={"Cadastre-se"} color="secondary" action="none" />
+                                    <Button label={"Cadastre-se"} color="secondary" action="none"/>
                                 </form>
                             </div>
                         </div>
