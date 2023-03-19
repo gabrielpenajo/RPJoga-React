@@ -35,7 +35,7 @@ export function Card({ title, image, description,  tags }) {
             className="absolute min-w-full drop-shadow-2xl
                    flex justify-center bg-transparent"
             >
-            <div className="grid w-[75%] h-fit bg-white p-3 rounded-lg">
+            <div className="grid w-full md:w-[75%] h-fit bg-white p-3 rounded-lg">
                 <div id="header" className="flex flex-row justify-between">
                     <h3 className="font-bold text-xl">{title}</h3>
                     <button
