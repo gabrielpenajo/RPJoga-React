@@ -6,5 +6,8 @@ export async function loginUser(credentials) {
         },
         body: JSON.stringify(credentials)
     })
-    .then(data => data.json())
+}
+
+export function logout() {
+    localStorage.removeItem("rpjoga")
 }
