@@ -5,6 +5,7 @@ import Login from './pages/Login';
 import SignUp from './pages/SignUp';
 import Rpgs from './pages/Rpgs';
 import { useState } from 'react';
+import Profile from './pages/Profile';
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
                     <Route path="login" element={<Login token={token} setToken={setToken} />} />
                     <Route path="signup" element={<SignUp />} />
                     <Route path="rpgs" element={<Rpgs />} />
+                    <Route path="profile" element={<Profile />} />
                 </Route>
             </Routes>
         </BrowserRouter>
