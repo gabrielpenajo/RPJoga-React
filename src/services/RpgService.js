@@ -7,8 +7,8 @@ export async function getAllRpgs() {
     return rpgs;
 }
 
-export async function getRpgsByUser() {
-    const rpgs = await fetch('http://localhost:5000/user/rpg', {
+export async function getRpgsByUser(email) {
+    const rpgs = await fetch('http://localhost:5000/user/rpg?email=' + email, {
         headers: { 'Content-Type': 'application/json' },
         method: 'GET'
     });

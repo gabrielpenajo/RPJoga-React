@@ -26,7 +26,7 @@ function Profile() {
 
     useEffect(() => {
         async function fetchRpgs() {
-            const response = await getRpgsByUser();
+            const response = await getRpgsByUser(getEmail());
             checkAuth(navigate);
             if (response.status === 200) {
                 const json = await response.json();
