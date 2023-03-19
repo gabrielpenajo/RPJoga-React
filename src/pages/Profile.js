@@ -29,6 +29,7 @@ function Profile() {
                 const json = await response.json();
                 setRpgs(json);
             }
+            checkAuth(navigate)
         }
         fetchRpgs();
     }, []);
