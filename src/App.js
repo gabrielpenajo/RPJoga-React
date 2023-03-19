@@ -16,7 +16,7 @@ function App() {
             <Routes>
                 <Route path="/" element={<Layout />}>
                     <Route index element={<Home />} />
-                    <Route path="login" element={<Login token={token} setToken={setToken} />} />
+                    <Route path="login" element={<Login setToken={setToken} />} />
                     <Route path="signup" element={<SignUp />} />
                     <Route path="rpgs" element={<Rpgs />} />
                     <Route path="profile" element={<Profile />} />

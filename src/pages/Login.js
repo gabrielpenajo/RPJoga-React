@@ -2,13 +2,15 @@ import { useState } from "react";
 import { Button } from "../components/Button";
 import { Input } from "../components/Input";
 import { loginUser } from "../services/AuthService";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const ColoredLine = ({ color }) => (
     <hr size="5" width="20%" color={color} />
 );
 
-function Login({ token, setToken }) {
+function Login({ setToken }) {
+    const navigate = useNavigate()
+
     const [email, setEmail] = useState('')
     const [isEmailFilled, setIsEmailFilled] = useState(false)
     const [password, setPassword] = useState('')
@@ -34,15 +36,19 @@ function Login({ token, setToken }) {
     const handleSubmit = async (e) => {
         e.preventDefault()
         try {
-            const token = await loginUser({
+            const response = await loginUser({
                 email,
                 password
             })
-            if (await token !== 'Authorized') {
+            if (response.status !== 200) {
                 setIsLoginInvalid(true)
                 return
             }
-            setToken(token)
+            const session = await response.json()
+            localStorage.removeItem("rpjoga", session.cookie)
+            localStorage.setItem("rpjoga", session.cookie)
+            setToken(session.cookie)
+            navigate("/rpgs")
         } catch (e) {
             setIsLoginInvalid(true)
         }    
@@ -50,9 +56,6 @@ function Login({ token, setToken }) {
 
     return (
         <div className="bg-main min-h-screen overflow-auto">
-            {token === 'Authorized' && (
-                <Navigate to="/rpgs" replace={true} />
-            )}
             <img
                 src={`${process.env.PUBLIC_URL}/assets/images/Castle-cuate.svg`}
                 className="absolute bg-no-repeat h-full opacity-10 bottom-0 right-0 pointer-events-none -z-1"

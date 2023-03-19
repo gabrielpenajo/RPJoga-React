@@ -1,8 +1,18 @@
+import { useNavigate } from "react-router-dom"
+import { logout } from "../services/AuthService"
+
 export function MenuToggle({ isOpen, setIsOpen, focusedLink }) {
+    const navigate = useNavigate()
 
     const handleMenuState = (event) => {
         setIsOpen(!isOpen)
         event.stopPropagation()
+    }
+
+    const handleLogout = (e) => {
+        e.preventDefault()
+        logout()
+        navigate("/")
     }
 
     return (
@@ -31,7 +41,7 @@ export function MenuToggle({ isOpen, setIsOpen, focusedLink }) {
                     </div>
                     <div className="mt-6">
                         <nav className="grid gap-y-8">
-                            <a href="/profile.html" className="-m-3 flex items-center rounded-md p-3 hover:bg-gray-50">
+                            <a href="/profile" className="-m-3 flex items-center rounded-md p-3 hover:bg-gray-50">
                                 <span className="material-symbols-outlined text-main">
                                     account_circle
                                 </span>
@@ -40,7 +50,7 @@ export function MenuToggle({ isOpen, setIsOpen, focusedLink }) {
                                 >Meu perfil</span>
                             </a>
 
-                            <a href="/rpgs.html" className="-m-3 flex items-center rounded-md p-3 hover:bg-gray-50">
+                            <a href="/rpgs" className="-m-3 flex items-center rounded-md p-3 hover:bg-gray-50">
                                 <span className="material-symbols-outlined text-main">
                                     book
                                 </span>
@@ -51,9 +61,9 @@ export function MenuToggle({ isOpen, setIsOpen, focusedLink }) {
                         </nav>
                     </div>
                 </div>
-                <div className="space-y-6 py-6 px-5">
+                <div className="space-y-6 py-6 px-5" onClick={handleLogout}>
                     <div>
-                        <a href="/index.html"
+                        <a href="/"
                             className="flex w-full items-center justify-center rounded-md border border-transparent bg-main px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-secondary">Sair</a>
                     </div>
                 </div>

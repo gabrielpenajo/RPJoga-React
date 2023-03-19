@@ -44,7 +44,7 @@ function Profile() {
     );
     return (
         <>
-            <Navbar></Navbar>
+            <Navbar focusedLink={"profile"}></Navbar>
             <div className="flex flex-col items-center w-full">
                 <div className="w-full overflow-hidden h-28 sm:h-32 md:h-64 ">
                     <img className="w-screen" src="https://media.glamourmagazine.co.uk/photos/6138a4931145ea59e77e6e74/16:9/w_2560%2Cc_limit/worldshing-_sf.jpg" alt="Foto de capa" />
