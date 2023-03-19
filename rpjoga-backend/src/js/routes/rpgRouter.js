@@ -1,5 +1,5 @@
 import express from 'express';
-import { createRpg, updateRpg, retrieveRpgsAndUsers, retrieveRpgsByUserId } from '../persistence/rpgPersistence.js';
+import { createRpg, updateRpg, retrieveRpgsAndUsers, retrieveRpgsByUserId, retrieveRpgById, retrieveAllRpgs } from '../persistence/rpgPersistence.js';
 
 const router = express.Router();
 
@@ -25,7 +25,28 @@ router.put('/', async (req, res) => {
     }
 });
 
-// Retrieve a user by user_id (provided via query param)
+// Retrieve a rpg by id (provided via route param)
+router.get('/:id', async (req, res) => {
+    try {
+        const rpg = await retrieveRpgById(req.params.id);
+        return res.json(rpg);
+    } catch (err) {
+        console.log(err);
+        res.status(500).send('Error retrieving rpgs');
+    }
+});
+
+// Retrieve all rpgs
+router.get('/', async (req, res) => {
+    try {
+        const allRpgs = await retrieveAllRpgs();
+        return res.json(allRpgs);
+    } catch (err) {
+        console.log(err);
+        res.status(500).send('Error retrieving rpgs');
+    }
+});
+
 router.get('/', async (req, res) => {
     try {
         if (req.query.user_id) {
