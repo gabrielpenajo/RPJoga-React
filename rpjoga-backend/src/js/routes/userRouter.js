@@ -59,8 +59,10 @@ router.post('/login', async(req, res) => {
             if (result){
                 session=req.session;
                 session.useremail=req.body.email;
-                console.log(req.session);
-                return res.json('Authorized');
+                return res.json({
+                    session: session,
+                    user: req.body.email
+                });
             } else {
                 res.status(401).send('Wrong email or password.');
             }
