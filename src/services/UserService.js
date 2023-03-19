@@ -19,10 +19,13 @@ export async function editUser(user) {
 }
 
 export async function getUser(email) {
-    const user = await fetch('http://localhost:5000/user/?email=' + email, {
+   return await fetch('http://localhost:5000/user/?email=' + email, {
         headers: { 'Content-Type': 'application/json' },
         method: 'GET'
     });
+}
 
-    return user;
+export function getEmail() {
+    const session = JSON.parse(localStorage.getItem("rpjoga"));
+    return session.useremail;
 }

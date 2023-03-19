@@ -3,7 +3,7 @@ import { Card } from "../components/Card";
 import { Navbar } from "../components/Navbar";
 import { getAllRpgs } from "../services/RpgService";
 import { useNavigate } from "react-router-dom";
-import { checkAuth, logout } from "../services/AuthService";
+import { checkAuth } from "../services/AuthService";
 
 function Rpgs() {
     const navigate = useNavigate()
@@ -18,7 +18,7 @@ function Rpgs() {
                 setRpgs(json);
             }
         }
-        checkAuth(navigate)   
+        checkAuth(navigate);   
         fetchRpgs();
     }, []);
 
