@@ -1,6 +1,6 @@
 import express, { json } from 'express';
 import { createUser, updateUser, retrieveUserByEmail, retrieveAllUsers } from '../persistence/userPersistence.js';
-import { retrieveRpgsAndUsers, retrieveRpgsByUserId } from '../persistence/rpgPersistence.js';
+import { retrieveRpgsAndUsers, retrieveRpgsByUserEmail } from '../persistence/rpgPersistence.js';
 import bcrypt from "bcrypt";
 
 const router = express.Router();
@@ -82,8 +82,8 @@ router.get('/logout', async(req, res) => {
 
 router.get('/rpg', async (req, res) => {
     try {
-        if (req.query.user_id) {
-            const rpgs = await retrieveRpgsByUserId(req.query.user_id);
+        if (req.query.email) {
+            const rpgs = await retrieveRpgsByUserEmail(req.query.email);
             return res.json(rpgs);
         } else {
             const allRpgs = await retrieveRpgsAndUsers();

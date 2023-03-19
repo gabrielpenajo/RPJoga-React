@@ -1,7 +1,7 @@
 import { getPool } from './database.js';
 import { CustomError, CustomErrorType } from '../utils/utils.js';
 import { v4 as uuidv4 } from 'uuid';
-
+import { retrieveUserByEmail } from './userPersistence.js';
 const INSERT_RPG =
     `INSERT INTO rpg(id,title,description,theme_list,user_id,creation_date,image_url)
                  VALUES (UUID_TO_BIN(?),?,?,?,UUID_TO_BIN(?),?,?)`;
@@ -68,13 +68,14 @@ export async function updateRpg(rpg) {
     }
 }
 
-export async function retrieveRpgsByUserId(user_id) {
+export async function retrieveRpgsByUserEmail(user_email) {
     try {
-        const [rows] = await getPool().execute(SELECT_RPGS_BY_USER_ID, [user_id]);
+        const user = await retrieveUserByEmail(user_email);
+        const [rows] = await getPool().execute(SELECT_RPGS_BY_USER_ID, [user.id]);
         return rows;
     } catch (err) {
         throw new CustomError(CustomErrorType.DatabaseError,
-            'Error retrieving rpg by user id: ' + user_id,
+            'Error retrieving rpg for user: ' + user_email,
             err);
     }
 }
