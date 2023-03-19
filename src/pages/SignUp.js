@@ -31,7 +31,7 @@ function SignUp() {
     const handlePasswordConfirm = (e) => {
         const passwordValue = e.target.value
         setPasswordConfirm(passwordValue)
-        setIsPasswordValid(passwordValue == password) 
+        setIsPasswordValid(passwordValue === password) 
     }
 
     const handleFullname = (e) => {
