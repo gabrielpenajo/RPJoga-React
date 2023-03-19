@@ -45,10 +45,10 @@ function Login({ setToken }) {
                 return
             }
             const json = await response.json()
-            const cookie = json.session.cookie
+            const session = json.session
             localStorage.removeItem("rpjoga")
-            localStorage.setItem("rpjoga", JSON.stringify(cookie))
-            setToken(await cookie)
+            localStorage.setItem("rpjoga", JSON.stringify(session))
+            setToken(await session)
             navigate("/rpgs")
         } catch (e) {
             setIsLoginInvalid(true)

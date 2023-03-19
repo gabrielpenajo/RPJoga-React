@@ -14,7 +14,7 @@ export function checkAuth(navigate) {
         navigate("/")
         return
     }
-    const expireDate = new Date(session.expires).getTime()
+    const expireDate = new Date(session.cookie.expires).getTime()
     const today = Date.now()
     if (expireDate < today) {
         navigate("/")
