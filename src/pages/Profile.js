@@ -13,7 +13,7 @@ function Profile() {
 
     useEffect(() => {
         async function fetchUser() {
-            const response = await getUser(getEmail());
+            const response = await getUser(await getEmail());
             if (response.status === 200) {
                 const json = await response.json();
                 setUser(json);
@@ -21,22 +21,21 @@ function Profile() {
         }
         checkAuth(navigate);
         fetchUser();
-    }, []);
+    }, [navigate]);
 
 
     useEffect(() => {
         async function fetchRpgs() {
-            const response = await getRpgsByUser(getEmail());
+            const response = await getRpgsByUser(await getEmail());
             checkAuth(navigate);
             if (response.status === 200) {
                 const json = await response.json();
                 setRpgs(json);
-                console.log(rpgs)
             }
         }
         checkAuth(navigate);
         fetchRpgs();
-    }, []);
+    }, [navigate]);
 
     const rpgCards = rpgs.map(rpg =>
         <Card
@@ -48,7 +47,7 @@ function Profile() {
         ></Card>
     );
 
-    const userName = <h1 className="font-bold text-3xl p-2 md:text-5xl h-20 md:h-28">{user && user.fullname || "Nome completo"} ({user && user.username || "Username"})</h1>
+    const userName = <h1 className="font-bold text-3xl p-2 md:text-5xl h-20 md:h-28">{(user && user.fullname )|| "Nome completo"} ({(user && user.username) || "Username"})</h1>
     return (
         <>
             <Navbar focusedLink={"profile"}></Navbar>
