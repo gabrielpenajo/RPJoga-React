@@ -1,14 +1,16 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "../components/Button";
 import { Input } from "../components/Input";
-import { loginUser } from "../services/AuthService";
-import { Navigate } from "react-router-dom";
+import { loginUser, logout } from "../services/AuthService";
+import { useNavigate } from "react-router-dom";
 
 const ColoredLine = ({ color }) => (
     <hr size="5" width="20%" color={color} />
 );
 
-function Login({ token, setToken }) {
+function Login({ setToken }) {
+    const navigate = useNavigate()
+
     const [email, setEmail] = useState('')
     const [isEmailFilled, setIsEmailFilled] = useState(false)
     const [password, setPassword] = useState('')
@@ -20,6 +22,23 @@ function Login({ token, setToken }) {
         setEmail(emailInput)
         setIsEmailFilled(emailInput.length > 0 && emailInput.search(/@/g) !== -1)
     }
+
+    useEffect(() => {
+        const session = JSON.parse(localStorage.getItem("rpjoga"))
+        console.log(session)
+        if (!session) {
+            logout()
+            return
+        }
+        const expireDate = new Date(session.cookie.expires).getTime()
+        const today = Date.now()
+        console.log(expireDate, today)
+        if (expireDate < today) {
+            logout()
+            return
+        }
+        navigate("/rpgs") 
+    }, [navigate])
 
     const handlePassword = (e) => {
         const passwordInput = e.target.value
@@ -34,15 +53,20 @@ function Login({ token, setToken }) {
     const handleSubmit = async (e) => {
         e.preventDefault()
         try {
-            const token = await loginUser({
+            const response = await loginUser({
                 email,
                 password
             })
-            if (await token !== 'Authorized') {
+            if (response.status !== 200) {
                 setIsLoginInvalid(true)
                 return
             }
-            setToken(token)
+            const json = await response.json()
+            const session = json.session
+            localStorage.removeItem("rpjoga")
+            localStorage.setItem("rpjoga", JSON.stringify(session))
+            setToken(await session)
+            navigate("/rpgs")
         } catch (e) {
             setIsLoginInvalid(true)
         }    
@@ -50,9 +74,6 @@ function Login({ token, setToken }) {
 
     return (
         <div className="bg-main min-h-screen overflow-auto">
-            {token === 'Authorized' && (
-                <Navigate to="/rpgs" replace={true} />
-            )}
             <img
                 src={`${process.env.PUBLIC_URL}/assets/images/Castle-cuate.svg`}
                 className="absolute bg-no-repeat h-full opacity-10 bottom-0 right-0 pointer-events-none -z-1"

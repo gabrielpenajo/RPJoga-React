@@ -14,7 +14,7 @@ export function Card({ title, image, description,  tags }) {
 
     const cardRef = (
         <div id="card" onClick={handleModalChange}
-            className="w-full overflow-y-scroll sm:overflow-y-hidden
+            className="w-full overflow-y-hidden
                 h-32 border border-gray-300 hover:shadow-lg transition-shadow
                 flex flex-row gap-2 rounded-lg cursor-pointer p-2">
             <div className="flex flex-shrink-0">
@@ -35,7 +35,7 @@ export function Card({ title, image, description,  tags }) {
             className="absolute min-w-full drop-shadow-2xl
                    flex justify-center bg-transparent"
             >
-            <div className="grid w-[75%] h-fit bg-white p-3 rounded-lg">
+            <div className="grid w-full md:w-[75%] h-fit bg-white p-3 rounded-lg">
                 <div id="header" className="flex flex-row justify-between">
                     <h3 className="font-bold text-xl">{title}</h3>
                     <button

@@ -11,6 +11,7 @@ CREATE TABLE user
     email VARCHAR(256) NOT NULL UNIQUE,
     username VARCHAR(256) NOT NULL UNIQUE,
     password VARCHAR(64) NOT NULL,
+    profile_pic VARCHAR(6000),
     birth_date DATE NOT NULL,
     PRIMARY KEY(id)
 );

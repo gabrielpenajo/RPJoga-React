@@ -1,5 +1,5 @@
 import express from 'express';
-import { createRpg, updateRpg, retrieveRpgsAndUsers, retrieveRpgsByUserId, retrieveRpgById, retrieveAllRpgs } from '../persistence/rpgPersistence.js';
+import { createRpg, updateRpg, retrieveRpgById, retrieveAllRpgs } from '../persistence/rpgPersistence.js';
 
 const router = express.Router();
 
@@ -25,6 +25,16 @@ router.put('/', async (req, res) => {
     }
 });
 
+router.get('/all', async (req, res) => {
+    try {
+        const rpg = await retrieveAllRpgs();
+        return res.json(rpg);
+    } catch (err) {
+        console.log(err);
+        res.status(500).send('Error retrieving rpgs');
+    }
+});
+
 // Retrieve a rpg by id (provided via route param)
 router.get('/:id', async (req, res) => {
     try {
@@ -35,32 +45,5 @@ router.get('/:id', async (req, res) => {
         res.status(500).send('Error retrieving rpgs');
     }
 });
-
-// Retrieve all rpgs
-router.get('/', async (req, res) => {
-    try {
-        const allRpgs = await retrieveAllRpgs();
-        return res.json(allRpgs);
-    } catch (err) {
-        console.log(err);
-        res.status(500).send('Error retrieving rpgs');
-    }
-});
-
-router.get('/', async (req, res) => {
-    try {
-        if (req.query.user_id) {
-            const rpgs = await retrieveRpgsByUserId(req.query.user_id);
-            return res.json(rpgs);
-        } else {
-            const allRpgs = await retrieveRpgsAndUsers();
-            return res.json(allRpgs);
-        }
-    } catch (err) {
-        console.log(err);
-        res.status(500).send('Error retrieving rpgs');
-    }
-});
-
 
 export default router;

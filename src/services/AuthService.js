@@ -6,5 +6,21 @@ export async function loginUser(credentials) {
         },
         body: JSON.stringify(credentials)
     })
-    .then(data => data.json())
+}
+
+export function checkAuth(navigate) {
+    const session = JSON.parse(localStorage.getItem("rpjoga"))
+    if (!session) {
+        navigate("/")
+        return
+    }
+    const expireDate = new Date(session.cookie.expires).getTime()
+    const today = Date.now()
+    if (expireDate < today) {
+        navigate("/")
+    } 
+}
+
+export function logout() {
+    localStorage.removeItem("rpjoga")
 }

@@ -1,12 +1,22 @@
 import { useState } from "react"
 import { MenuToggle } from "./MenuToggle"
+import { useNavigate } from "react-router-dom"
+import { logout } from "../services/AuthService"
 
 export function Navbar({ focusedLink }) {
+    const navigate = useNavigate()
+    
     const [isOpen, setOpen] = useState(false)
 
     const handleMenuClick = (event) => {
         setOpen(!isOpen)
         event.stopPropagation()
+    }
+
+    const handleLogout = (e) => {
+        e.preventDefault()
+        logout()
+        navigate("/")
     }
 
     return (
@@ -39,8 +49,8 @@ export function Navbar({ focusedLink }) {
                         <a href="/rpgs" className={`text-base font-medium ${focusedLink === 'rpgs' ? 'text-gray-400' : 'text-white'} hover:text-secondary`}>RPGs</a>
                         <a href="/profile" className={`text-base font-medium ${focusedLink === 'profile' ? 'text-gray-400' : 'text-white'} hover:text-secondary`}>Meu perfil</a>
                     </nav>
-                    <div className="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
-                        <a href="/login" className="whitespace-nowrap text-base font-medium text-white hover:text-secondary">Sair</a>
+                    <div className="hidden items-center justify-end md:flex md:flex-1 lg:w-0" onClick={handleLogout}>
+                        <a href="/" className="whitespace-nowrap text-base font-medium text-white hover:text-secondary">Sair</a>
                     </div>
                 </div>
             </div>
