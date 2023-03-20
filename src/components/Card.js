@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
+import { useClickOutside } from "../utils/UseClickOutside";
 
 export function Card({ title, image, description,  tags }) {
     const [isOpen, setOpen] = useState(false);
@@ -7,6 +8,11 @@ export function Card({ title, image, description,  tags }) {
         setOpen(!isOpen)
         event.stopPropagation()
     }
+
+    const ref = useRef()
+    const domNode = useClickOutside(ref, () => {
+        setOpen(false)
+    })
 
     const tagsElement = tags ? tags.split(',').map((tag, index) =>
         <li className="list-disc list-inside" key={index}>{tag}</li>
@@ -35,7 +41,7 @@ export function Card({ title, image, description,  tags }) {
             className="absolute min-w-full drop-shadow-2xl
                    flex justify-center bg-transparent"
             >
-            <div className="grid w-full md:w-[75%] h-fit bg-white p-3 rounded-lg">
+            <div className="grid w-full md:w-[75%] h-fit bg-white p-3 rounded-lg" ref={ref}>
                 <div id="header" className="flex flex-row justify-between">
                     <h3 className="font-bold text-xl">{title}</h3>
                     <button

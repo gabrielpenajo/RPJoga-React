@@ -1,8 +1,11 @@
+import { useRef } from "react"
 import { useNavigate } from "react-router-dom"
 import { logout } from "../services/AuthService"
+import { useClickOutside } from "../utils/UseClickOutside"
 
 export function MenuToggle({ isOpen, setIsOpen, focusedLink }) {
     const navigate = useNavigate()
+    const ref = useRef()
 
     const handleMenuState = (event) => {
         setIsOpen(!isOpen)
@@ -15,9 +18,13 @@ export function MenuToggle({ isOpen, setIsOpen, focusedLink }) {
         navigate("/")
     }
 
+    const domNode = useClickOutside(ref, () => {
+        setIsOpen(false)
+    })
+
     return (
     <nav className={isOpen ? "" : "hidden"}>
-        <div className="absolute z-10 inset-x-0 top-0 origin-top-right transform p-2 transition md:hidden">
+        <div className="absolute z-10 inset-x-0 top-0 origin-top-right transform p-2 transition md:hidden" ref={ref}>
             <div className="divide-y-2 divide-gray-50 rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5">
                 <div className="px-5 pt-5 pb-6">
                     <div className="flex items-center justify-between">
