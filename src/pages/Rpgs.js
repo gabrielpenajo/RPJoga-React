@@ -20,7 +20,7 @@ function Rpgs() {
         }
         checkAuth(navigate);   
         fetchRpgs();
-    }, []);
+    }, [navigate]);
 
     const rpgCards = rpgs.map(rpg =>
         <Card
@@ -38,6 +38,7 @@ function Rpgs() {
             <div className="flex flex-col w-full items-center">
                 <div className="flex flex-col md:w-2/3 w-full">
                     <div className="flex flex-col items-center gap-8 p-4 w-full">
+                    <h1 className="text-3xl font-bold">Todos os RPGs</h1>
                         {rpgCards}
                     </div>
                 </div>
