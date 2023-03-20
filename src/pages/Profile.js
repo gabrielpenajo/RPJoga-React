@@ -48,7 +48,7 @@ function Profile() {
         ></Card>
     );
 
-    const userName = <h1 className="font-bold text-3xl p-2 md:text-5xl h-20 md:h-28">{user && user.fullname} ({user && user.username})</h1>
+    const userName = <h1 className="font-bold text-3xl p-2 md:text-5xl h-20 md:h-28">{user && user.fullname || "Nome completo"} ({user && user.username || "Username"})</h1>
     return (
         <>
             <Navbar focusedLink={"profile"}></Navbar>
@@ -58,7 +58,7 @@ function Profile() {
                 </div>
                 <div className="flex flex-col items-start w-full lg:w-2/3 max-w-4xl">
                     <div className="flex flex-row absolute top-24 sm:top-40 items-end px-4 gap-2">
-                        <img className="bg-white border-white border-8 rounded-full h-40 w-40 md:h-72 md:w-72" src={user.profile_pic} alt="Foto de perfil" />
+                        <img className="bg-white border-white border-8 rounded-full h-40 w-40 md:h-72 md:w-72" src={user && user.profile_pic} alt="Foto de perfil" />
                         {userName} 
                     </div>
                 </div>
