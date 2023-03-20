@@ -1,5 +1,5 @@
 export async function getAllRpgs() {
-    const rpgs = await fetch('http://localhost:5000/user/rpg', {
+    const rpgs = await fetch('http://localhost:5000/rpg/all', {
         headers: { 'Content-Type': 'application/json' },
         method: 'GET'
     });

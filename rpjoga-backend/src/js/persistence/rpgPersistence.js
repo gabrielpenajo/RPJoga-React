@@ -15,17 +15,17 @@ const SELECT_ALL_RPGS =
             FROM rpg`;
 
 const SELECT_RPG_BY_ID =
-    `SELECT BIN_TO_UUID(id) as id,title,description,theme_list,DATE_FORMAT(creation_date,'%Y-%m-%d') as creation_date
+    `SELECT BIN_TO_UUID(id) as id,title,image_url,description,theme_list,DATE_FORMAT(creation_date,'%Y-%m-%d') as creation_date
             FROM rpg
             WHERE id=UUID_TO_BIN(?)`;
 
 const SELECT_RPGS_BY_USER_ID =
-    `SELECT BIN_TO_UUID(id) as id,title,description,theme_list,DATE_FORMAT(creation_date,'%Y-%m-%d') as creation_date
+    `SELECT BIN_TO_UUID(id) as id,title,image_url,description,theme_list,DATE_FORMAT(creation_date,'%Y-%m-%d') as creation_date
             FROM rpg
             WHERE user_id=UUID_TO_BIN(?)`;
 
 const SELECT_RPGS_AND_USERS =
-    `SELECT BIN_TO_UUID(rpg.id) as rpg_id, user.fullname as user_name, rpg.title, rpg.description, DATE_FORMAT(rpg.creation_date,'%Y-%m-%d') as creation_date
+    `SELECT BIN_TO_UUID(rpg.id) as rpg_id, rpg.image_url, user.fullname as user_name, rpg.title, rpg.theme_list, rpg.description, DATE_FORMAT(rpg.creation_date,'%Y-%m-%d') as creation_date
                 FROM rpg
                 INNER JOIN user
                 ON rpg.user_id = user.id

@@ -1,5 +1,5 @@
 import express from 'express';
-import { createRpg, updateRpg, retrieveRpgById } from '../persistence/rpgPersistence.js';
+import { createRpg, updateRpg, retrieveRpgById, retrieveAllRpgs } from '../persistence/rpgPersistence.js';
 
 const router = express.Router();
 
@@ -22,6 +22,16 @@ router.put('/', async (req, res) => {
             console.log(err);
             res.status(500).send('Error creating rpg');
         }
+    }
+});
+
+router.get('/all', async (req, res) => {
+    try {
+        const rpg = await retrieveAllRpgs();
+        return res.json(rpg);
+    } catch (err) {
+        console.log(err);
+        res.status(500).send('Error retrieving rpgs');
     }
 });
 
