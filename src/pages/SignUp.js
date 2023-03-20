@@ -24,8 +24,17 @@ function SignUp() {
     const [isEmailInUse, setIsEmailInUse] = useState(false)
     const [success, setSuccess] = useState(false)
 
+    const [profilePic, setProfilePic] = useState('https://www.pngitem.com/pimgs/m/22-223968_default-profile-picture-circle-hd-png-download.png')
+    const [isProfilePicValid, setIsProfilePicValid] = useState(true)
+
     const isValid = () => {
-        return (isPasswordValid && isFullnameValid && isEmailValid && isUsernameValid && isBirthdateValid)
+        return (isPasswordValid && isFullnameValid && isEmailValid && isUsernameValid && isBirthdateValid && isProfilePicValid)
+    }
+
+    const handleProfilePic = (e) => {
+        const profilePicValue = e.target.value
+        setProfilePic(profilePicValue)
+        setIsProfilePicValid(profilePicValue.length > 0)
     }
 
     const handlePasswordConfirm = (e) => {
@@ -69,7 +78,8 @@ function SignUp() {
             email: email,
             username: username,
             password: password,
-            birth_date: birthdate
+            birth_date: birthdate,
+            profile_pic: profilePic
         }
         const response = await registerUser(user)
         if (response.status === 500) {
@@ -113,20 +123,31 @@ function SignUp() {
                                 <Input id="password" value={password} label="Senha" type="password" size="full" onChange={handlePassword} />
                             </div>
                             <div className="md:mb-4">
-                            <Input id="birthDay" value={birthdate} label="Data de Nascimento" type="date" size="full" onChange={handleBirthdate} />
+                                <Input id="birthDay" value={birthdate} label="Data de Nascimento" type="date" size="full" onChange={handleBirthdate} />
                             </div>
                         </div>
                         <div className="w-full flex flex-col p-2 md:basis-1/2">
                             <div className="mb-4">
-                            <Input id="email" value={email} label="Email" type="text" size="full" onChange={handleEmail} />
+                                <Input id="email" value={email} label="Email" type="text" size="full" onChange={handleEmail} />
                             </div>
                             <div className="mb-4">
-                            <Input id="confirmPassword" value={passwordConfirm} label="Confirmar senha" type="password" size="full" onChange={handlePasswordConfirm} />
+                                <Input id="confirmPassword" value={passwordConfirm} label="Confirmar senha" type="password" size="full" onChange={handlePasswordConfirm} />
                             </div>
                             <div className="mb-4">
-                            <Input id="username" value={username} label="Nome de usuário" type="text" size="full" onChange={handleUsername} />
+                                <Input id="username" value={username} label="Nome de usuário" type="text" size="full" onChange={handleUsername} />
                             </div>
                         </div>
+                    </div>
+                    <div className="w-full mb-4 p-2">
+                        <Input id="profilePic" value={profilePic} label="Foto de perfil" type="text" size="full" onChange={handleProfilePic} />
+                    </div>
+                    <div className="w-full flex flex-col items-center z-10 mb-4 p-2">
+                        {isProfilePicValid &&
+                            <div className="flex flex-col items-center max-w-md">
+                                <p className="text-white">Sua foto de perfil:</p>
+                                <img src={profilePic} alt="Foto de perfil"/>
+                            </div>
+                        }
                     </div>
                     <div className="flex flex-col w-full justify-center items-center mb-4 md:w-1/3">
                         <Button label={"Confirmar Cadastro"} color="success" action="none" type={'submit'} isValid={isValid()}/>

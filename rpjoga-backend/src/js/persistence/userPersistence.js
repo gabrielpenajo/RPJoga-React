@@ -4,24 +4,24 @@ import { v4 as uuidv4 } from 'uuid';
 import bcrypt from "bcrypt";
 
 const INSERT_USER =
-    `INSERT INTO user(id,fullname,email,username,password,birth_date)
-                 VALUES (UUID_TO_BIN(?),?,?,?,?,?)`;
+    `INSERT INTO user(id,fullname,email,username,password,birth_date,profile_pic)
+                 VALUES (UUID_TO_BIN(?),?,?,?,?,?,?)`;
 
 const UPDATE_USER =
-    `UPDATE user set fullname=?,username=?,birth_date=?
+    `UPDATE user set fullname=?,username=?,birth_date=?,profile_pic=?
             WHERE BIN_TO_UUID(id)=?`;
 
 const SELECT_USER_BY_ID =
-    `SELECT BIN_TO_UUID(id) as id,fullname,username,email,DATE_FORMAT(birth_date,'%Y-%m-%d') as birth_date
+    `SELECT BIN_TO_UUID(id) as id,fullname,username,email,DATE_FORMAT(birth_date,'%Y-%m-%d') as birth_date,profile_pic
             FROM user
             WHERE id=UUID_TO_BIN(?)`;
 
 const SELECT_ALL_USERS = 
-    `SELECT BIN_TO_UUID(id) as id,fullname,username,email,DATE_FORMAT(birth_date,'%Y-%m-%d') as birth_date
+    `SELECT BIN_TO_UUID(id) as id,fullname,username,email,DATE_FORMAT(birth_date,'%Y-%m-%d') as birth_date,profile_pic
         FROM user`;
 
 const SELECT_USER_BY_EMAIL =
-    `SELECT BIN_TO_UUID(id) as id,fullname,username,email,password,DATE_FORMAT(birth_date,'%Y-%m-%d') as birth_date
+    `SELECT BIN_TO_UUID(id) as id,fullname,username,email,password,DATE_FORMAT(birth_date,'%Y-%m-%d') as birth_date,profile_pic
             FROM user
             WHERE email=?`;
 
@@ -74,7 +74,8 @@ export async function createUser(user) {
                     user.email,
                     user.username,
                     hash,
-                    user.birth_date
+                    user.birth_date,
+                    user.profile_pic
                 ]);
             });
         console.log("Created user with email" + user.email);
@@ -93,6 +94,7 @@ export async function updateUser(user) {
                 user.fullname,
                 user.username,
                 user.birth_date,
+                user.profile_pic,
                 user.id,
             ]);
         console.log("Updated user");
