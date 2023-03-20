@@ -37,7 +37,7 @@ function Login({ setToken }) {
             logout()
             return
         }
-        navigate("rpgs") 
+        navigate("/rpgs") 
     }, [navigate])
 
     const handlePassword = (e) => {
