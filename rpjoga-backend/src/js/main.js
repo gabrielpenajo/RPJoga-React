@@ -12,7 +12,7 @@ const port = 5000;
 const maxAge = 43200000
 
 app.use(session({
-    secret: 'rpjogasecret4i20',
+    secret: 'rpjogasecret',
     saveUninitialized: false,
     cookie: { maxAge: maxAge }, 
     resave: false
