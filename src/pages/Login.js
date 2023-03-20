@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "../components/Button";
 import { Input } from "../components/Input";
-import { loginUser } from "../services/AuthService";
+import { loginUser, logout } from "../services/AuthService";
 import { useNavigate } from "react-router-dom";
 
 const ColoredLine = ({ color }) => (
@@ -22,6 +22,23 @@ function Login({ setToken }) {
         setEmail(emailInput)
         setIsEmailFilled(emailInput.length > 0 && emailInput.search(/@/g) !== -1)
     }
+
+    useEffect(() => {
+        const session = JSON.parse(localStorage.getItem("rpjoga"))
+        console.log(session)
+        if (!session) {
+            logout()
+            return
+        }
+        const expireDate = new Date(session.cookie.expires).getTime()
+        const today = Date.now()
+        console.log(expireDate, today)
+        if (expireDate < today) {
+            logout()
+            return
+        }
+        navigate("rpgs") 
+    }, [navigate])
 
     const handlePassword = (e) => {
         const passwordInput = e.target.value
